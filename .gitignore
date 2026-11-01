@@ -1,0 +1,19 @@
+# 비밀 값 (깃허브에 올리지 않음)
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+# 파이썬
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Claude Code 설정 (로컬 전용)
+.claude/
+
+# 기타
+*.zip
+.DS_Store
+Thumbs.db
