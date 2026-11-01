@@ -24,12 +24,13 @@ st.set_page_config(page_title="팀 편성", page_icon="👥", layout="wide")
 
 def secret(name: str) -> str | None:
     value = os.environ.get(name)
-    if value:
-        return value
-    try:
-        return st.secrets.get(name)
-    except Exception:  # secrets.toml이 없을 때
-        return None
+    if not value:
+        try:
+            value = st.secrets.get(name)
+        except Exception:  # secrets.toml이 없을 때
+            value = None
+    # 붙여 넣을 때 섞인 앞뒤 공백과 줄바꿈을 지운다(키, 비밀번호, DB 주소 모두).
+    return value.strip() if isinstance(value, str) and value.strip() else None
 
 
 def models() -> list[str]:

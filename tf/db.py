@@ -24,8 +24,9 @@ STUDENT_PASSWORD = "1234"
 
 def make_pool(database_url: str) -> ConnectionPool:
     # prepare_threshold=None: Supabase 연결 풀러(트랜잭션 모드)에서도 동작하게 한다.
+    # strip: Secrets에 붙여 넣을 때 끝에 줄바꿈이 섞이면 DB 이름이 "postgres\n"이 되어 접속이 실패한다.
     return ConnectionPool(
-        conninfo=database_url,
+        conninfo=database_url.strip(),
         min_size=1,
         max_size=5,
         kwargs={"prepare_threshold": None, "connect_timeout": 10},
